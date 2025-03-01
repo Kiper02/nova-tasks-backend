@@ -1,0 +1,23 @@
+version: latest
+
+services:
+  db:
+    container_name: postgres_tasks_db
+    image: postgres:14
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_HOST=${DB_HOST}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - ${DB_PORT}:5432
+    networks:
+      - nova-tasks-backend
+networks:
+  nova-tasks-backend:
+
+volumes:
+  db-data:
